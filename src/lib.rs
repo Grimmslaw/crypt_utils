@@ -3,13 +3,13 @@
 //! DISCLAIMER: This module and its functions are purely for entertainment or study. It is
 //! in no way appropriate for any situation in which cryptographic security is required.
 
-const DEFAULT_CHAR_OFFSET: u32 = 65;
-const ALPHABET_SIZE: u32 = 26;
-
 /// Structs and functions specifically having to do with processes that make classical
 /// cryptography possible.
 pub mod crypt {
     use std::convert::TryInto;
+
+    const DEFAULT_CHAR_OFFSET: u32 = 65;
+    const ALPHABET_SIZE: u32 = 26;
 
     /// Contains fields to be used by a generator that produces keys to transform plaintext
     /// using the given keyword.
@@ -91,8 +91,8 @@ pub mod crypt {
     pub fn wrapped_shift_letters(to_shift: char, shift_by: u32) -> char {
         let code_point = to_shift as u32;
         if (65..91).contains(&code_point) || (97..123).contains(&code_point) {
-            let transformed =
-                (((code_point - DEFAULT_OFFSET) + shift_by) % ALPHABET_SIZE) + DEFAULT_OFFSET;
+            let transformed = (((code_point - DEFAULT_CHAR_OFFSET) + shift_by) % ALPHABET_SIZE)
+                + DEFAULT_CHAR_OFFSET;
             std::char::from_u32(transformed).unwrap_or(to_shift)
         } else {
             to_shift
