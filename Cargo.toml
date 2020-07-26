@@ -1,0 +1,10 @@
+[package]
+name = "crypt_utils"
+version = "0.1.0"
+authors = ["dwrickey <d.wrickey@gmail.com>"]
+edition = "2018"
+license = "MIT OR Apache-2.0"
+keywords = ["classical", "crytography"]
+description = "Utilities for simple classical cryptography"
+
+[dependencies]
