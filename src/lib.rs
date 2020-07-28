@@ -34,22 +34,10 @@ fn normalize_char_codepoint(start: char) -> Option<(u32, u32)> {
 
 /// Shifts the given `char` by the given amount, wrapping back around to the beginning of
 /// the alphabet if `shift_by` is greater than the amount of letters left in the alphabet.
-///
-/// # Example
-///
-/// ```
-/// let shifted: char = KeyGenerator::wrapped_shift_letters('a', 12u32);
-/// ```
-pub fn wrapped_shift_letters(to_shift: char, key_char: char) -> char {
+pub fn wrapped_shift_letter(to_shift: char, key_char: char) -> char {
     let normalized_start = normalize_char_codepoint(to_shift);
-    println!("normalized_start = {:?}", normalized_start);
     let normalized_shift = normalize_char_codepoint(key_char);
-    println!("normalized_shift = {:?}", normalized_shift);
     if normalized_start == None || normalized_shift == None {
-        println!(
-            "Either normalized_start ({:?}) or normalized_shift ({:?}) is `None`",
-            normalized_start, normalized_shift
-        );
         return to_shift;
     }
 
@@ -63,14 +51,15 @@ pub fn wrapped_shift_letters(to_shift: char, key_char: char) -> char {
 #[cfg(test)]
 mod tests {
     use super::keygen::KeyGenerator;
-    use super::wrapped_shift_letters;
+    use super::wrapped_shift_letter;
+
     #[test]
     fn shifts_correct_amount() {
         let mut keygen = KeyGenerator::new(String::from("queen"), false);
         let key = keygen.next().unwrap();
         println!("key to shift by: {:?}", key);
 
-        let shifted = wrapped_shift_letters('a', key);
+        let shifted = wrapped_shift_letter('a', key);
         assert_eq!(shifted, 'q');
     }
 }

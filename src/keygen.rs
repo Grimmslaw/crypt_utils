@@ -18,12 +18,6 @@ pub struct KeyGenerator {
 /// When the cursor reaches the end of the keyword, it loops back to the beginning.
 impl KeyGenerator {
     /// Creates a new `KeyGenerator` with the given keyword and sets the cursor to its first letter.
-    ///
-    /// # Example
-    ///
-    /// ```
-    /// let keygen = KeyGenerator::new(String::from("Queen"), true);
-    /// ```
     pub fn new(keyword: String, retain_case: bool) -> KeyGenerator {
         KeyGenerator {
             keyword,
@@ -37,13 +31,6 @@ impl Iterator for KeyGenerator {
     type Item = char;
 
     /// Generates the next key from the keyword as a `char`.
-    ///
-    /// # Example
-    ///
-    /// ```
-    /// let keygen = KeyGenerator::new(String::from("Queen", true));
-    /// let key: char = keygen.next().unwrap();
-    /// ```
     fn next(&mut self) -> Option<char> {
         if self.position as usize >= self.keyword.len() {
             self.position = 0;
